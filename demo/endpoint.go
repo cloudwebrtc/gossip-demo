@@ -7,6 +7,7 @@ import (
 	"github.com/stefankopieczek/gossip/base"
 	"github.com/stefankopieczek/gossip/log"
 	"github.com/stefankopieczek/gossip/transaction"
+	"github.com/stefankopieczek/gossip/transport"
 )
 
 
@@ -40,7 +41,11 @@ type txInfo struct {
 }
 
 func (e *EndPoint) Start() error {
-	tm, err := transaction.NewManager(e.Transport, fmt.Sprintf("%v:%v", e.Host, e.Port))
+	trm, err := transport.NewManager(e.Transport)
+	if err != nil {
+		return err
+	}
+	tm, err := transaction.NewManager(trm, fmt.Sprintf("%v:%v", e.Host, e.Port))
 	if err != nil {
 		return err
 	}
