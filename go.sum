@@ -1,0 +1,4 @@
+github.com/cloudwebrtc/gossip v0.0.0-20200221034056-6a48ce22c636 h1:bJWZSJOOMn2esElYkFHaRgGMAhrgRUq92Zna8vW8lek=
+github.com/cloudwebrtc/gossip v0.0.0-20200221034056-6a48ce22c636/go.mod h1:ifDkIIyMPoFJOFACXVX4oIHe+K3es2Pufmlmexj/U1o=
+github.com/discoviking/fsm v0.0.0-20150126104936-f4a273feecca h1:cTTdXpkQ1aVbOOmHwdwtYuwUZcQtcMrleD1UXLWhAq8=
+github.com/discoviking/fsm v0.0.0-20150126104936-f4a273feecca/go.mod h1:W+3LQaEkN8qAwwcw0KC546sUEnX86GIT8CcMLZC4mG0=

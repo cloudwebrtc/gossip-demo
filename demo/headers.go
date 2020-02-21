@@ -1,7 +1,6 @@
 package demo
 
-import "github.com/stefankopieczek/gossip/base"
-
+import "github.com/cloudwebrtc/gossip/base"
 
 // Utility methods for creating headers.
 
@@ -13,16 +12,16 @@ func Via(e *EndPoint, branch string) *base.ViaHeader {
 			Transport:       e.Transport,
 			Host:            e.Host,
 			Port:            &e.Port,
-			Params: base.NewParams().Add("branch",base.String{S:branch}),
+			Params:          base.NewParams().Add("branch", base.String{S: branch}),
 		},
 	}
 }
 
 func To(e *EndPoint, tag string) *base.ToHeader {
 	header := &base.ToHeader{
-		DisplayName: base.String{S:e.DisplayName},
+		DisplayName: base.String{S: e.DisplayName},
 		Address: &base.SipUri{
-			User:      base.String{S:e.UserName},
+			User:      base.String{S: e.UserName},
 			Host:      e.Host,
 			UriParams: base.NewParams(),
 		},
@@ -30,7 +29,7 @@ func To(e *EndPoint, tag string) *base.ToHeader {
 	}
 
 	if tag != "" {
-		header.Params.Add("tag",base.String{S:tag})
+		header.Params.Add("tag", base.String{S: tag})
 	}
 
 	return header
@@ -38,17 +37,17 @@ func To(e *EndPoint, tag string) *base.ToHeader {
 
 func From(e *EndPoint, tag string) *base.FromHeader {
 	header := &base.FromHeader{
-		DisplayName: base.String{S:e.DisplayName},
+		DisplayName: base.String{S: e.DisplayName},
 		Address: &base.SipUri{
-			User: base.String{S:e.UserName},
-			Host: e.Host,
-			UriParams: base.NewParams().Add("Transport",base.String{S:e.Transport}),
+			User:      base.String{S: e.UserName},
+			Host:      e.Host,
+			UriParams: base.NewParams().Add("Transport", base.String{S: e.Transport}),
 		},
 		Params: base.NewParams(),
 	}
 
 	if tag != "" {
-		header.Params.Add("tag",base.String{S:tag})
+		header.Params.Add("tag", base.String{S: tag})
 	}
 
 	return header
@@ -56,9 +55,9 @@ func From(e *EndPoint, tag string) *base.FromHeader {
 
 func Contact(e *EndPoint) *base.ContactHeader {
 	return &base.ContactHeader{
-		DisplayName: base.String{S:e.DisplayName},
+		DisplayName: base.String{S: e.DisplayName},
 		Address: &base.SipUri{
-			User: base.String{S:e.UserName},
+			User: base.String{S: e.UserName},
 			Host: e.Host,
 		},
 	}
@@ -79,4 +78,3 @@ func CallId(callid string) *base.CallId {
 func ContentLength(l uint32) base.ContentLength {
 	return base.ContentLength(l)
 }
-

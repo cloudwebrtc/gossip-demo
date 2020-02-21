@@ -4,12 +4,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/stefankopieczek/gossip/base"
-	"github.com/stefankopieczek/gossip/log"
-	"github.com/stefankopieczek/gossip/transaction"
-	"github.com/stefankopieczek/gossip/transport"
+	"github.com/cloudwebrtc/gossip/base"
+	"github.com/cloudwebrtc/gossip/log"
+	"github.com/cloudwebrtc/gossip/transaction"
+	"github.com/cloudwebrtc/gossip/transport"
 )
-
 
 type EndPoint struct {
 	// Sip Params
@@ -72,7 +71,7 @@ func (caller *EndPoint) Invite(callee *EndPoint) error {
 	invite := base.NewRequest(
 		base.INVITE,
 		&base.SipUri{
-			User: base.String{S:callee.UserName},
+			User: base.String{S: callee.UserName},
 			Host: callee.Host,
 		},
 		"SIP/2.0",
@@ -104,8 +103,8 @@ func (caller *EndPoint) Invite(callee *EndPoint) error {
 				switch str := tag.(type) {
 				case base.String:
 					caller.dialog.to_tag = str.S
-//				case NoString():
-//				    return str.String()
+					//				case NoString():
+					//				    return str.String()
 				}
 			}
 
@@ -135,7 +134,7 @@ func (caller *EndPoint) nonInvite(callee *EndPoint, method base.Method) error {
 	request := base.NewRequest(
 		method,
 		&base.SipUri{
-			User: base.String{S:callee.UserName},
+			User: base.String{S: callee.UserName},
 			Host: callee.Host,
 		},
 		"SIP/2.0",
@@ -203,9 +202,9 @@ func (e *EndPoint) ServeInvite() {
 	base.CopyHeaders("CSeq", tx.Origin(), resp)
 	resp.AddHeader(
 		&base.ContactHeader{
-			DisplayName: base.String{S:e.DisplayName},
+			DisplayName: base.String{S: e.DisplayName},
 			Address: &base.SipUri{
-				User: base.String{S:e.UserName},
+				User: base.String{S: e.UserName},
 				Host: e.Host,
 			},
 		},
@@ -244,9 +243,9 @@ func (e *EndPoint) ServeNonInvite() {
 	base.CopyHeaders("CSeq", tx.Origin(), resp)
 	resp.AddHeader(
 		&base.ContactHeader{
-			DisplayName: base.String{S:e.DisplayName},
+			DisplayName: base.String{S: e.DisplayName},
 			Address: &base.SipUri{
-				User: base.String{S:e.UserName},
+				User: base.String{S: e.UserName},
 				Host: e.Host,
 			},
 		},
@@ -256,4 +255,3 @@ func (e *EndPoint) ServeNonInvite() {
 	<-time.After(1 * time.Second)
 	tx.Respond(resp)
 }
-

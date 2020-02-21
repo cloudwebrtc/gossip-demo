@@ -3,8 +3,9 @@ package main
 import (
 	"flag"
 	"time"
-	"gossip-demo/demo"
-	"github.com/stefankopieczek/gossip/log"
+
+	"github.com/cloudwebrtc/gossip-demo/demo"
+	"github.com/cloudwebrtc/gossip/log"
 )
 
 var (
@@ -27,8 +28,6 @@ var (
 	}
 )
 
-
-
 func TestCall() {
 	log.SetDefaultLogLevel(log.DEBUG)
 	err := caller.Start()
@@ -39,7 +38,6 @@ func TestCall() {
 	caller.Invite(callee)
 
 }
-
 
 func TestServer() {
 	log.SetDefaultLogLevel(log.DEBUG)
@@ -62,13 +60,13 @@ func TestServer() {
   to start server.
 
   In another shell window, run "go run main.go -call 1" to do a test call
-  */
+*/
 
 func main() {
 	var doCall = 0
-	flag.IntVar(&doCall, "call",0, "do a test call")
+	flag.IntVar(&doCall, "call", 0, "do a test call")
 	flag.Parse()
-	if (doCall > 0) {
+	if doCall > 0 {
 		TestCall()
 	} else {
 		TestServer()
